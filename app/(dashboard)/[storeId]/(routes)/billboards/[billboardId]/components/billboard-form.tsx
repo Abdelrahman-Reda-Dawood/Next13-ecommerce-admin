@@ -36,7 +36,9 @@ interface BillboardFormProps {
   initialData: Billboard | null;
 }
 
-export const BillboardForm: React.FC<BillboardFormProps> = ({ initialData }) => {
+export const BillboardForm: React.FC<BillboardFormProps> = ({
+  initialData,
+}) => {
   const params = useParams();
   const router = useRouter();
 
@@ -45,7 +47,9 @@ export const BillboardForm: React.FC<BillboardFormProps> = ({ initialData }) => 
 
   const title = initialData ? "Edit billboard" : "Create Billboard";
   const description = initialData ? "Edit Billboard" : "Add a new Billboard";
-  const toastMessage = initialData ? "Billboard updated." : "Billboard created.";
+  const toastMessage = initialData
+    ? "Billboard updated."
+    : "Billboard created.";
   const action = initialData ? "Save changes" : "Create";
 
   const form = useForm<BillboardFormValues>({
@@ -80,7 +84,9 @@ export const BillboardForm: React.FC<BillboardFormProps> = ({ initialData }) => 
   const onDelete = async () => {
     try {
       setLoading(true);
-      await axios.delete(`/api/${params.storeId}/billboards/${params.billboardId}`);
+      await axios.delete(
+        `/api/${params.storeId}/billboards/${params.billboardId}`
+      );
       router.refresh();
       router.push(`/${params.storeId}/billboards`);
       toast.success("Billboard deleted.");
@@ -134,7 +140,7 @@ export const BillboardForm: React.FC<BillboardFormProps> = ({ initialData }) => 
                 <FormControl>
                   <ImageUpload
                     value={field.value ? [field.value] : []}
-                    disabeld={loading}
+                    disabled={loading}
                     onChange={(url) => field.onChange(url)}
                     onRemove={() => field.onChange("")}
                   />
