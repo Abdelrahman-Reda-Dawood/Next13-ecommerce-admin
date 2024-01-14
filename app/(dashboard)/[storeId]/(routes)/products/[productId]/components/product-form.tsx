@@ -50,7 +50,7 @@ type ProductFormValues = z.infer<typeof formSchema>;
 interface ProductFormProps {
   initialData:
     | (Product & {
-        images: Image[];
+        images: { url: string }[];
       })
     | null;
   categories: Category[];
